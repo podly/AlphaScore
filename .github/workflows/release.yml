@@ -33,7 +33,9 @@ jobs:
         run: |
           pio run `
             --project-dir firmware `
+            -e nano-new-bootloader `
             -e nano-old-bootloader
+            
 
       - name: Przygotuj pliki wydania
         shell: pwsh
