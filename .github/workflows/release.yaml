@@ -32,8 +32,8 @@ jobs:
         shell: pwsh
         run: |
           pio run `
-            -e nano-newbootloader `
-            -e nano-oldbootloader
+            -e nano-new-bootloader `
+            -e nano-old-bootloader
 
       - name: Przygotuj pliki wydania
         shell: pwsh
@@ -41,7 +41,7 @@ jobs:
           New-Item -ItemType Directory -Force -Path release
 
           Copy-Item `
-            ".pio/build/nano-newbootloader/firmware.hex" `
+            ".pio/build/nano-new-bootloader/firmware.hex" `
             "release/firmware-nano-new-bootloader.hex"
 
           Copy-Item `
@@ -49,7 +49,7 @@ jobs:
             "release/firmware-nano-old-bootloader.hex"
 
           Copy-Item `
-            ".pio/build/nano-newbootloader/firmware.elf" `
+            ".pio/build/nano-new-bootloader/firmware.elf" `
             "release/firmware-nano-new-bootloader.elf"
 
           Copy-Item `

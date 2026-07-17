@@ -24,7 +24,7 @@ jobs:
 
       - name: Skompiluj oba warianty Nano
         shell: pwsh
-        run: pio run -e nano-newbootloader -e nano-oldbootloader
+        run: pio run -e nano-new-bootloader -e nano-old-bootloader
 
       - name: Przygotuj pliki firmware
         shell: pwsh
@@ -32,15 +32,15 @@ jobs:
           New-Item -ItemType Directory -Force -Path artifacts
 
           Copy-Item `
-            ".pio/build/nano-newbootloader/firmware.hex" `
+            ".pio/build/nano-new-bootloader/firmware.hex" `
             "artifacts/firmware-nano-new-bootloader.hex"
 
           Copy-Item `
-            ".pio/build/nano-oldbootloader/firmware.hex" `
+            ".pio/build/nano-old-bootloader/firmware.hex" `
             "artifacts/firmware-nano-old-bootloader.hex"
 
           Copy-Item `
-            ".pio/build/nano-newbootloader/firmware.elf" `
+            ".pio/build/nano-new-bootloader/firmware.elf" `
             "artifacts/firmware-nano-new-bootloader.elf"
 
           Copy-Item `
