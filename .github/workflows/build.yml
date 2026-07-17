@@ -5,6 +5,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: windows-latest
@@ -24,7 +27,11 @@ jobs:
 
       - name: Skompiluj oba warianty Nano
         shell: pwsh
-        run: pio run -e nano-new-bootloader -e nano-old-bootloader
+        run: |
+          pio run `
+            --project-dir firmware `
+            -e nano-new-bootloader `
+            -e nano-old-bootloader
 
       - name: Przygotuj pliki firmware
         shell: pwsh
@@ -32,23 +39,23 @@ jobs:
           New-Item -ItemType Directory -Force -Path artifacts
 
           Copy-Item `
-            ".pio/build/nano-new-bootloader/firmware.hex" `
+            "firmware/.pio/build/nano-new-bootloader/firmware.hex" `
             "artifacts/firmware-nano-new-bootloader.hex"
 
           Copy-Item `
-            ".pio/build/nano-old-bootloader/firmware.hex" `
+            "firmware/.pio/build/nano-old-bootloader/firmware.hex" `
             "artifacts/firmware-nano-old-bootloader.hex"
 
           Copy-Item `
-            ".pio/build/nano-new-bootloader/firmware.elf" `
+            "firmware/.pio/build/nano-new-bootloader/firmware.elf" `
             "artifacts/firmware-nano-new-bootloader.elf"
 
           Copy-Item `
-            ".pio/build/nano-old-bootloader/firmware.elf" `
+            "firmware/.pio/build/nano-old-bootloader/firmware.elf" `
             "artifacts/firmware-nano-old-bootloader.elf"
 
       - name: Zapisz firmware
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Nano-firmware
           path: artifacts/

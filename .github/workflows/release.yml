@@ -32,6 +32,7 @@ jobs:
         shell: pwsh
         run: |
           pio run `
+            --project-dir firmware `
             -e nano-new-bootloader `
             -e nano-old-bootloader
 
@@ -41,19 +42,19 @@ jobs:
           New-Item -ItemType Directory -Force -Path release
 
           Copy-Item `
-            ".pio/build/nano-new-bootloader/firmware.hex" `
+            "firmware/.pio/build/nano-new-bootloader/firmware.hex" `
             "release/firmware-nano-new-bootloader.hex"
 
           Copy-Item `
-            ".pio/build/nano-old-bootloader/firmware.hex" `
+            "firmware/.pio/build/nano-old-bootloader/firmware.hex" `
             "release/firmware-nano-old-bootloader.hex"
 
           Copy-Item `
-            ".pio/build/nano-new-bootloader/firmware.elf" `
+            "firmware/.pio/build/nano-new-bootloader/firmware.elf" `
             "release/firmware-nano-new-bootloader.elf"
 
           Copy-Item `
-            ".pio/build/nano-old-bootloader/firmware.elf" `
+            "firmware/.pio/build/nano-old-bootloader/firmware.elf" `
             "release/firmware-nano-old-bootloader.elf"
 
       - name: Utwórz GitHub Release
