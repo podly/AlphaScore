@@ -148,21 +148,20 @@ void DisplayController::showDemoCharacters(uint8_t startPosition, const char *te
   }
 }
 void DisplayController::selfTest() {
+  constexpr const char *startupText[Config::LogicalDisplays] = {
+    "        ",
+    " * ALPHA",
+    "SCORE * ",
+    "        "
+  };
+
   for (uint8_t display = 0; display < Config::LogicalDisplays; display++) {
     for (uint8_t pos = 0; pos < Config::CharactersPerDisplay; pos++) {
-      driver_.setCharacter(display, pos, SegmentFont::encode('8', true, fontStyle_));
+      driver_.setCharacter(display, pos, SegmentFont::encode(startupText[display][pos], false, fontStyle_));
     }
   }
 
-  delay(Config::SelfTestSegmentsMs);
-
-  for (uint8_t display = 0; display < Config::LogicalDisplays; display++) {
-    for (uint8_t pos = 0; pos < Config::CharactersPerDisplay; pos++) {
-      driver_.setCharacter(display, pos, SegmentFont::encode(static_cast<char>('1' + display), false, fontStyle_));
-    }
-  }
-
-  delay(Config::SelfTestIdMs);
+  delay(Config::SelfTestMessageMs);
   clearAll();
 }
 

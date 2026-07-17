@@ -31,8 +31,7 @@ constexpr uint16_t BlinkOnMs = 500;
 constexpr uint16_t BlinkOffMs = 200;
 
 constexpr bool SelfTestEnabled = true;
-constexpr uint16_t SelfTestSegmentsMs = 1000;
-constexpr uint16_t SelfTestIdMs = 2000;
+constexpr uint16_t SelfTestMessageMs = 3000;
 
 constexpr bool ReverseDigitOrder = true;
 
