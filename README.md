@@ -6,6 +6,14 @@
   </p>
 </p>
 
+<p align="center">
+  <img
+    src="assets/images/score-board-15-segments-long.png"
+    alt="AlphaScore controller"
+    width="1200"
+  >
+</p>
+
 ---
 
 ## Overview
