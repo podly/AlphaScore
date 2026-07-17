@@ -254,6 +254,16 @@ Disable:
 
 While Demo Mode is active, all incoming commands are ignored except `@X`, allowing Demo Mode to be disabled via UART.
 
+The included Python helper can switch Demo Mode over a serial port:
+
+```bash
+python -m pip install pyserial
+python firmware/demo_mode.py COM3 on
+python firmware/demo_mode.py COM3 off
+```
+
+Replace `COM3` with the controller's serial port (for example `/dev/ttyUSB0` on Linux).
+
 </details>
 
 ---
