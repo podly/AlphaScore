@@ -53,7 +53,7 @@ jobs:
             "release/firmware-nano-new-bootloader.elf"
 
           Copy-Item `
-            ".pio/build/nano-oldbootloader/firmware.elf" `
+            ".pio/build/nano-old-bootloader/firmware.elf" `
             "release/firmware-nano-old-bootloader.elf"
 
       - name: Utwórz GitHub Release
