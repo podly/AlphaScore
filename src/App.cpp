@@ -55,6 +55,7 @@ void setDemoMode(bool enabled) {
   if (demoMode) {
     demo.begin();
   } else {
+    display.setFontStyle(fancyFont ? SegmentFont::Style::Fancy : SegmentFont::Style::Standard);
     display.clearAll();
   }
 }

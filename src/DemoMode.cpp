@@ -365,6 +365,7 @@ DemoMode::DemoMode(DisplayController &display)
 }
 
 void DemoMode::begin() {
+  display_.setFontStyle(SegmentFont::Style::Fancy);
   effect_ = Effect::Intro;
   frame_ = 0;
   lastUpdate_ = millis();
