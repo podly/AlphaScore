@@ -45,7 +45,7 @@ jobs:
             "release/firmware-nano-new-bootloader.hex"
 
           Copy-Item `
-            ".pio/build/nano-oldbootloader/firmware.hex" `
+            ".pio/build/nano-old-bootloader/firmware.hex" `
             "release/firmware-nano-old-bootloader.hex"
 
           Copy-Item `

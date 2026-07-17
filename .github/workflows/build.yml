@@ -44,7 +44,7 @@ jobs:
             "artifacts/firmware-nano-new-bootloader.elf"
 
           Copy-Item `
-            ".pio/build/nano-oldbootloader/firmware.elf" `
+            ".pio/build/nano-old-bootloader/firmware.elf" `
             "artifacts/firmware-nano-old-bootloader.elf"
 
       - name: Zapisz firmware
