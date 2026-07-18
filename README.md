@@ -20,7 +20,7 @@
 
 AlphaScore is an Arduino Nano based display controller designed to drive up to four 8-character alphanumeric displays.
 
-The firmware was originally developed as a replacement display controller for classic pinball machines and is fully compatible with the **MyPinballs Compatibility Protocol**.
+The firmware was originally developed as a replacement display controller for classic pinball machines and is fully compatible with the **myPinballs Compatibility Protocol**.
 
 In addition to compatibility mode, AlphaScore introduces an extended protocol providing direct segment control, brightness adjustment, display management and additional advanced features.
 
@@ -33,7 +33,7 @@ The controller communicates over a UART serial interface and does not require an
 * Supports up to 4 independent alphanumeric displays
 * 8 characters per display
 * UART communication (115200 baud)
-* Compatible with the MyPinBalls Compatibility Protocol
+* Compatible with the myPinballs Compatibility Protocol
 * Extended AlphaScore Protocol
 * Direct 7-segment and 15-segment control
 * Individual or global brightness control
@@ -65,7 +65,7 @@ The controller does **not** transmit acknowledgements or responses.
 
 ---
 
-# MyPinBalls Compatibility Protocol
+# myPinballs Compatibility Protocol
 
 Command format:
 
