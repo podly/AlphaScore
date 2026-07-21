@@ -42,10 +42,11 @@ controller and display module.
 
 ## Displays and I2C addressing
 
-The boards are intended for 2-character, 15-segment common-cathode displays,
+The boards are intended for 2-character, 15-segment common-cathode displays
+from the [ELD-5241A-B series](../docs/datasheets/ELD-5241A-B/ELD-5241A-B.pdf),
 such as 5241AW (white), 5241AB (blue), 5241AS (red) and 5241AY (yellow).
-HT16K33 or compatible VK16K33 drivers communicate with the Arduino Nano over
-the I2C bus.
+[HT16K33](../docs/datasheets/HT16K33/HT16K33Av111.pdf) or compatible VK16K33
+drivers communicate with the Arduino Nano over the I2C bus.
 
 AlphaScore uses eight display drivers. Every driver on the shared I2C bus must
 have a unique address configured with its solder jumpers. Set the addresses

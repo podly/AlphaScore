@@ -310,12 +310,13 @@ The firmware supports:
 * Arduino Nano (ATmega328P)
 * ATmega328P with the **old** bootloader
 * ATmega328P with the **new** bootloader
-* 2-character, 15-segment common-cathode displays, for example:
+* 2-character, 15-segment common-cathode displays from the
+  [ELD-5241A-B series](docs/datasheets/ELD-5241A-B/ELD-5241A-B.pdf), for example:
   * **5241AW** (white)
   * **5241AB** (blue)
   * **5241AS** (red)
   * **5241AY** (yellow)
-* **HT16K33** or **VK16K33** display drivers
+* [**HT16K33**](docs/datasheets/HT16K33/HT16K33Av111.pdf) or **VK16K33** display drivers
 
 The Arduino communicates with the display drivers over the **I2C** bus. The
 controller uses eight drivers, and each driver must have a unique address set
