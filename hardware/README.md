@@ -56,6 +56,8 @@ Three solder jumpers marked **A2**, **A1** and **A0** are located next to each
 HT16K33. Together they form a 3-bit binary number which is added to the
 HT16K33 base address of `0x70`:
 
+![HT16K33 I2C address solder jumpers](../assets/images/i2c-address-jumpers.png)
+
 ```text
 I2C address = 0x70 + (A2 * 4) + (A1 * 2) + A0
 ```
