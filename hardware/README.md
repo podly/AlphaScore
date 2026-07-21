@@ -52,6 +52,33 @@ have a unique address configured with its solder jumpers. Set the addresses
 consecutively from `0x70` through `0x77`; duplicated addresses will cause bus
 conflicts and incorrect display operation.
 
+Three solder jumpers marked **A2**, **A1** and **A0** are located next to each
+HT16K33. Together they form a 3-bit binary number which is added to the
+HT16K33 base address of `0x70`:
+
+```text
+I2C address = 0x70 + (A2 * 4) + (A1 * 2) + A0
+```
+
+`A2` is the most significant bit and `A0` is the least significant bit. In the
+table below, `0` means that the solder jumper is open and `1` means that it is
+bridged with solder.
+
+| Driver | A2 | A1 | A0 | I2C address |
+| ---: | :-: | :-: | :-: | :-: |
+| 1 | 0 | 0 | 0 | `0x70` |
+| 2 | 0 | 0 | 1 | `0x71` |
+| 3 | 0 | 1 | 0 | `0x72` |
+| 4 | 0 | 1 | 1 | `0x73` |
+| 5 | 1 | 0 | 0 | `0x74` |
+| 6 | 1 | 0 | 1 | `0x75` |
+| 7 | 1 | 1 | 0 | `0x76` |
+| 8 | 1 | 1 | 1 | `0x77` |
+
+For example, the second driver uses `A2,A1,A0 = 0,0,1`. This binary value is
+`1`, so its address is `0x70 + 1 = 0x71`. The sixth driver uses `1,0,1`, which
+is binary `5`, giving `0x70 + 5 = 0x75`.
+
 ## Assembly notes
 
 Before ordering or assembling a board:
@@ -68,4 +95,3 @@ Before ordering or assembling a board:
 When using the modular design, keep I2C and power connections short and secure.
 All modules must share ground with the Arduino Nano. Check the supply capacity
 for the complete display assembly before connecting power.
-
