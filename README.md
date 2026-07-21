@@ -310,8 +310,40 @@ The firmware supports:
 * Arduino Nano (ATmega328P)
 * ATmega328P with the **old** bootloader
 * ATmega328P with the **new** bootloader
+* 2-character, 15-segment common-cathode displays, for example:
+  * **5241AW** (white)
+  * **5241AB** (blue)
+  * **5241AS** (red)
+  * **5241AY** (yellow)
+* **HT16K33** or **VK16K33** display drivers
+
+The Arduino communicates with the display drivers over the **I2C** bus. The
+controller uses eight drivers, and each driver must have a unique address set
+with its solder jumpers. Configure the drivers with consecutive addresses from
+`0x70` through `0x77`.
 
 Both firmware variants are automatically built and attached to every GitHub Release.
+
+---
+
+## Testing
+
+The included [`firmware/test_serial_protocol.py`](firmware/test_serial_protocol.py)
+script sends a visual test sequence that exercises all controller functions on
+every display, including text modes, raw segment control, brightness, clearing
+and Demo Mode.
+
+Install the required serial library and run the script with the controller's
+serial port:
+
+```bash
+python -m pip install pyserial
+python firmware/test_serial_protocol.py COM3
+```
+
+Replace `COM3` with the appropriate port, for example `/dev/ttyUSB0` on Linux.
+Use `--interactive` to confirm each test step manually or `--dry-run` to preview
+the commands without connecting to the controller.
 
 ---
 
