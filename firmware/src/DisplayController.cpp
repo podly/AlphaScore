@@ -57,29 +57,34 @@ void DisplayController::renderRaw(uint8_t displayOneBased, char *payload) {
     return;
   }
 
-  const uint8_t display = displayOneBased - 1;
-  displays_[display].mode = Config::ModeRaw;
-  displays_[display].autoDecimalPoints = false;
-  clearText(displays_[display].text);
-
+  SegmentFont::Mask masks[Config::CharactersPerDisplay] = {};
   char *token = strtok(payload, ",");
   for (uint8_t i = 0; i < Config::CharactersPerDisplay; i++) {
     uint16_t raw = 0;
     bool wideToken = false;
     if (token) {
       wideToken = isWideHexToken(token);
-      raw = parseHexWord(token);
+      if (!parseHexWord(token, raw)) {
+        return;
+      }
       token = strtok(nullptr, ",");
     }
 
-    SegmentFont::Mask mask = !wideToken
+    masks[i] = !wideToken
       ? SegmentFont::fromSevenSegment(static_cast<uint8_t>(raw))
       : raw;
+  }
 
+  const uint8_t display = displayOneBased - 1;
+  displays_[display].mode = Config::ModeRaw;
+  displays_[display].autoDecimalPoints = false;
+  clearText(displays_[display].text);
+
+  for (uint8_t i = 0; i < Config::CharactersPerDisplay; i++) {
     const uint8_t physicalPosition = Config::ReverseDigitOrder
       ? i
       : Config::CharactersPerDisplay - 1 - i;
-    driver_.setCharacter(display, physicalPosition, mask);
+    driver_.setCharacter(display, physicalPosition, masks[i]);
   }
 }
 
@@ -262,23 +267,32 @@ bool DisplayController::isNumericText(const char *text) const {
   return hasDigit;
 }
 
-uint16_t DisplayController::parseHexWord(const char *token) const {
-  uint16_t value = 0;
-
-  for (uint8_t i = 0; i < 4 && token[i] != '\0'; i++) {
-    const char c = token[i];
-    value <<= 4;
-
-    if (c >= '0' && c <= '9') {
-      value |= c - '0';
-    } else if (c >= 'A' && c <= 'F') {
-      value |= c - 'A' + 10;
-    } else if (c >= 'a' && c <= 'f') {
-      value |= c - 'a' + 10;
-    }
+bool DisplayController::parseHexWord(const char *token, uint16_t &value) const {
+  if (token == nullptr || token[0] == '\0') {
+    return false;
   }
 
-  return value;
+  value = 0;
+
+  uint8_t length = 0;
+  for (; length < 4 && token[length] != '\0'; length++) {
+    const char c = token[length];
+    uint8_t digit = 0;
+
+    if (c >= '0' && c <= '9') {
+      digit = c - '0';
+    } else if (c >= 'A' && c <= 'F') {
+      digit = c - 'A' + 10;
+    } else if (c >= 'a' && c <= 'f') {
+      digit = c - 'a' + 10;
+    } else {
+      return false;
+    }
+
+    value = (value << 4) | digit;
+  }
+
+  return token[length] == '\0';
 }
 
 bool DisplayController::isWideHexToken(const char *token) const {

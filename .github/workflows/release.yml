@@ -16,28 +16,27 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Pobierz kod
+      - name: Check out code
         uses: actions/checkout@v6
 
-      - name: Skonfiguruj Python
+      - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
-      - name: Zainstaluj PlatformIO
+      - name: Install PlatformIO
         shell: pwsh
         run: python -m pip install --upgrade platformio
 
-      - name: Skompiluj oba warianty Nano
+      - name: Build both Nano variants
         shell: pwsh
         run: |
           pio run `
             --project-dir firmware `
             -e nano-new-bootloader `
             -e nano-old-bootloader
-            
 
-      - name: Przygotuj pliki wydania
+      - name: Prepare release files
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path release
@@ -58,7 +57,7 @@ jobs:
             "firmware/.pio/build/nano-old-bootloader/firmware.elf" `
             "release/firmware-nano-old-bootloader.elf"
 
-      - name: Utwórz GitHub Release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
           name: Firmware ${{ github.ref_name }}

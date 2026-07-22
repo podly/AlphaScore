@@ -52,7 +52,7 @@ private:
   void refresh(uint8_t display);
   void drawText(uint8_t display, const char *text, bool matchMode, bool autoDecimalPoints);
   bool isNumericText(const char *text) const;
-  uint16_t parseHexWord(const char *token) const;
+  bool parseHexWord(const char *token, uint16_t &value) const;
   bool isWideHexToken(const char *token) const;
 };
 

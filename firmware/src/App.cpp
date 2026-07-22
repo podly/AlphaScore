@@ -36,6 +36,7 @@ char line[96];
 uint8_t jumperMask = 0;
 bool demoMode = false;
 bool fancyFont = false;
+bool hardwareBrightness = false;
 
 bool parseDemoCommand(char *line, bool &enabled) {
   if (line == nullptr || line[0] != '@') {
@@ -81,12 +82,16 @@ void appSetup() {
 
   jumpers.begin();
   jumperMask = jumpers.readMask();
+  hardwareBrightness = (jumperMask & 0x01) != 0;
   demoMode = (jumperMask & 0x08) != 0;
   fancyFont = (jumperMask & 0x04) != 0;
 
   display.begin();
   display.setFontStyle(fancyFont ? SegmentFont::Style::Fancy : SegmentFont::Style::Standard);
-  brightness.begin();
+  parser.setBrightnessCommandsEnabled(!hardwareBrightness);
+  if (hardwareBrightness) {
+    brightness.begin();
+  }
 
   if (demoMode) {
     demo.begin();
@@ -99,7 +104,9 @@ void appSetup() {
 }
 
 void appLoop() {
-  brightness.update();
+  if (hardwareBrightness) {
+    brightness.update();
+  }
 
   const bool hasLine = serialReader.readLine(line, sizeof(line));
   if (hasLine) {

@@ -20,6 +20,10 @@ CommandParser::CommandParser(DisplayController &display)
   : display_(display) {
 }
 
+void CommandParser::setBrightnessCommandsEnabled(bool enabled) {
+  brightnessCommandsEnabled_ = enabled;
+}
+
 void CommandParser::parse(char *line) {
   if (line == nullptr || line[0] == '\0') {
     return;
@@ -30,6 +34,32 @@ void CommandParser::parse(char *line) {
   } else {
     parseLegacy(line);
   }
+}
+
+bool CommandParser::parseUint8(const char *text, uint8_t minValue, uint8_t maxValue, uint8_t &value) const {
+  if (text == nullptr || text[0] == '\0') {
+    return false;
+  }
+
+  uint16_t parsed = 0;
+  for (uint8_t i = 0; text[i] != '\0'; i++) {
+    const char c = text[i];
+    if (c < '0' || c > '9') {
+      return false;
+    }
+
+    parsed = parsed * 10 + (c - '0');
+    if (parsed > maxValue) {
+      return false;
+    }
+  }
+
+  if (parsed < minValue) {
+    return false;
+  }
+
+  value = static_cast<uint8_t>(parsed);
+  return true;
 }
 
 void CommandParser::parseLegacy(char *line) {
@@ -53,8 +83,13 @@ void CommandParser::parseLegacy(char *line) {
     return;
   }
 
-  const uint8_t mode = static_cast<uint8_t>(atoi(modeStr));
-  const uint8_t display = static_cast<uint8_t>(atoi(displayStr));
+  uint8_t mode = 0;
+  uint8_t display = 0;
+  if (!parseUint8(modeStr, Config::ModeNormal, Config::ModeMatch, mode)
+      || !parseUint8(displayStr, 1, Config::LogicalDisplays, display)) {
+    return;
+  }
+
   const bool autoDecimalPoints = mode == Config::ModeNormal || mode == Config::ModeFlash || mode == Config::ModeMatch;
   display_.setModeText(display, mode, textStr, autoDecimalPoints);
 }
@@ -83,20 +118,29 @@ void CommandParser::parseExtended(char *line) {
   }
 
   const char command = commandStr[0];
-  const uint8_t display = static_cast<uint8_t>(atoi(displayStr));
+  uint8_t display = 0;
+  if (!parseUint8(displayStr, 0, Config::LogicalDisplays, display)) {
+    return;
+  }
 
   switch (command) {
     case 'R':
     case 'r':
+      if (display == 0) {
+        return;
+      }
       display_.renderRaw(display, payloadStr);
       break;
 
     case 'B':
     case 'b': {
-      if (payloadStr == nullptr) {
+      if (!brightnessCommandsEnabled_ || payloadStr == nullptr) {
         return;
       }
-      const uint8_t brightness = static_cast<uint8_t>(atoi(payloadStr));
+      uint8_t brightness = 0;
+      if (!parseUint8(payloadStr, Config::BrightnessMin, Config::BrightnessMax, brightness)) {
+        return;
+      }
       if (display == 0) {
         display_.setAllBrightness(brightness);
       } else {

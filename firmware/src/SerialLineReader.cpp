@@ -23,6 +23,12 @@ bool SerialLineReader::readLine(char *out, uint8_t outSize) {
     }
 
     if (c == '\n') {
+      if (discardingLine_) {
+        discardingLine_ = false;
+        pos_ = 0;
+        continue;
+      }
+
       buffer_[pos_] = '\0';
 
       if (outSize > 0) {
@@ -37,9 +43,14 @@ bool SerialLineReader::readLine(char *out, uint8_t outSize) {
       return true;
     }
 
+    if (discardingLine_) {
+      continue;
+    }
+
     if (pos_ < BufferSize - 1) {
       buffer_[pos_++] = c;
     } else {
+      discardingLine_ = true;
       pos_ = 0;
     }
   }

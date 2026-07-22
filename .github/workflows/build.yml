@@ -13,19 +13,19 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Pobierz kod
+      - name: Check out code
         uses: actions/checkout@v6
 
-      - name: Skonfiguruj Python
+      - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
-      - name: Zainstaluj PlatformIO
+      - name: Install PlatformIO
         shell: pwsh
         run: python -m pip install --upgrade platformio
 
-      - name: Skompiluj oba warianty Nano
+      - name: Build both Nano variants
         shell: pwsh
         run: |
           pio run `
@@ -33,7 +33,7 @@ jobs:
             -e nano-new-bootloader `
             -e nano-old-bootloader
 
-      - name: Przygotuj pliki firmware
+      - name: Prepare firmware files
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path artifacts
@@ -54,7 +54,7 @@ jobs:
             "firmware/.pio/build/nano-old-bootloader/firmware.elf" `
             "artifacts/firmware-nano-old-bootloader.elf"
 
-      - name: Zapisz firmware
+      - name: Upload firmware artifact
         uses: actions/upload-artifact@v7
         with:
           name: Nano-firmware

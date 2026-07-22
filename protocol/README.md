@@ -176,8 +176,10 @@ Brightness range:
 
 > **Note**
 >
-> Brightness is refreshed every 100 ms from the onboard analog brightness potentiometer.
-> Values set using `@B` may therefore be overwritten by the analog brightness control.
+> When the JP24 brightness jumper is active, brightness is controlled exclusively
+> by the onboard analog potentiometer and `@B` commands are ignored. When JP24 is
+> inactive, the potentiometer is not read and brightness can be controlled with
+> `@B` commands.
 
 </details>
 
