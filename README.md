@@ -108,6 +108,20 @@ with its solder jumpers. Configure the drivers with consecutive addresses from
 Prebuilt firmware variants for ATmega328P boards with the old and new Arduino
 Nano bootloaders are automatically attached to every GitHub Release.
 
+### Configuration jumpers
+
+The controller provides four active-low configuration jumpers. A jumper is
+active when it is closed and pulls the corresponding Arduino input to ground.
+Their states are read during startup, so restart the controller after changing
+a jumper.
+
+| Jumper | PCB label | Function | Description |
+|--------|-----------|----------|-------------|
+| **JP24** | **Bright** | Brightness | Enables hardware brightness control using the onboard potentiometer. While active, serial `@B` brightness commands are ignored. When inactive, the potentiometer is not read and brightness is controlled through `@B` commands. |
+| **JP25** | **F1** | Reserved | Reserved for future use. It currently has no effect. |
+| **JP26** | **F2** | Fancy font | Enables the myPinballs-compatible Fancy font. When inactive, the Standard font is used. |
+| **JP27** | **F3** or **Demo** | Demo Mode | Starts the controller in Demo Mode. While Demo Mode is active, display commands are ignored except `@X`, which can be used to disable it. |
+
 ---
 
 ## Prebuilt firmware

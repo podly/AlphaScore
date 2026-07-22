@@ -36,10 +36,10 @@ constexpr uint8_t BrightnessMax = 15;
 constexpr uint8_t DefaultBrightness = 4;
 constexpr uint16_t BrightnessUpdateMs = 100;
 
-constexpr uint8_t Jp24Pin = 2; // BRIGHTNESS
-constexpr uint8_t Jp25Pin = 3; // RESERVED FOR FUTURE USE
-constexpr uint8_t Jp26Pin = 4; // MYPINBALLS FANCY FONT
-constexpr uint8_t Jp27Pin = 5; // DEMO
+constexpr uint8_t Jp24Pin = 2; // 'Bright' - BRIGHTNESS
+constexpr uint8_t Jp25Pin = 3; // 'F1' RESERVED FOR FUTURE USE
+constexpr uint8_t Jp26Pin = 4; // 'F2' MYPINBALLS FANCY FONT
+constexpr uint8_t Jp27Pin = 5; // 'F3' or 'Demo' - DEMO MODE
 
 constexpr uint16_t BlinkOnMs = 500;
 constexpr uint16_t BlinkOffMs = 200;
