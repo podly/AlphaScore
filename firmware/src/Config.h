@@ -37,7 +37,7 @@ constexpr uint8_t DefaultBrightness = 4;
 constexpr uint16_t BrightnessUpdateMs = 100;
 
 constexpr uint8_t Jp24Pin = 2; // BRIGHTNESS
-constexpr uint8_t Jp25Pin = 3;
+constexpr uint8_t Jp25Pin = 3; // RESERVED FOR FUTURE USE
 constexpr uint8_t Jp26Pin = 4; // MYPINBALLS FANCY FONT
 constexpr uint8_t Jp27Pin = 5; // DEMO
 
