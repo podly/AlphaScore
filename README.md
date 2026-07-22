@@ -110,6 +110,49 @@ Nano bootloaders are automatically attached to every GitHub Release.
 
 ---
 
+## Prebuilt firmware
+
+Ready-to-flash `.hex` files for Arduino Nano boards with both the new and old
+bootloaders are available on the
+[GitHub Releases page](https://github.com/podly/AlphaScore/releases). Download
+the file matching the bootloader installed on your board.
+
+---
+
+## Building the firmware
+
+The firmware is built with [PlatformIO](https://platformio.org/) and requires
+Python 3. Install the PlatformIO command-line tools with:
+
+```bash
+python -m pip install --upgrade platformio
+```
+
+From the repository root, build both supported Arduino Nano variants:
+
+```bash
+pio run --project-dir firmware -e nano-new-bootloader -e nano-old-bootloader
+```
+
+To build only one variant, omit the other `-e` option. The generated firmware
+files are written to:
+
+* `firmware/.pio/build/nano-new-bootloader/firmware.hex`
+* `firmware/.pio/build/nano-old-bootloader/firmware.hex`
+
+Choose `nano-new-bootloader` for current Arduino Nano boards and
+`nano-old-bootloader` for boards using the legacy bootloader. To compile and
+upload a selected variant directly to a connected board, run:
+
+```bash
+pio run --project-dir firmware -e nano-new-bootloader --target upload --upload-port COM3
+```
+
+Replace `COM3` with the board's serial port, for example `/dev/ttyUSB0` on
+Linux, and change the environment name if the board uses the old bootloader.
+
+---
+
 ## Testing
 
 The complete display system can be verified with the included
