@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     SegmentFont.cpp
+ *
+ * Description:
+ *     Implements character and 7-segment conversion for the 15-segment displays.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #include "SegmentFont.h"
 
 namespace SegmentFont {

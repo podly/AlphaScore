@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     DemoMode.cpp
+ *
+ * Description:
+ *     Implements the animated AlphaScore display demonstration sequence.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #include "DemoMode.h"
 
 namespace {

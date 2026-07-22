@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     Jumpers.cpp
+ *
+ * Description:
+ *     Reads the onboard configuration jumpers and builds their state mask.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #include "Jumpers.h"
 
 #include "Config.h"

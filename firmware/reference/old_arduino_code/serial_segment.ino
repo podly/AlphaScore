@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     serial_segment.ino
+ *
+ * Description:
+ *     Preserves the original serial display controller sketch for reference.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #include <LedControl.h>
 
 #define DIN_PIN 11

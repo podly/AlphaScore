@@ -1,5 +1,18 @@
 #!/usr/bin/env python3
-"""Visual test of the 15-segment display serial input protocol."""
+"""
+AlphaScore
+
+Copyright (c) 2026 Michal Podlejski
+
+File:
+    test_serial_protocol.py
+
+Description:
+    Sends a comprehensive visual test sequence to the AlphaScore controller.
+
+License:
+    MIT License. See LICENSE file for details.
+"""
 
 from __future__ import annotations
 

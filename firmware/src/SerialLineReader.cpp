@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     SerialLineReader.cpp
+ *
+ * Description:
+ *     Implements buffered, line-oriented command input from the UART interface.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #include "SerialLineReader.h"
 
 bool SerialLineReader::readLine(char *out, uint8_t outSize) {

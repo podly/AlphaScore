@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     DemoMode.h
+ *
+ * Description:
+ *     Declares the non-blocking display demonstration mode.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #pragma once
 
 #include <Arduino.h>

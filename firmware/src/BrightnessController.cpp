@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     BrightnessController.cpp
+ *
+ * Description:
+ *     Reads the brightness control and applies its value to the displays.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #include "BrightnessController.h"
 
 #include "Config.h"

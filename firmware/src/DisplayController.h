@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     DisplayController.h
+ *
+ * Description:
+ *     Declares high-level control of the AlphaScore logical displays.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #pragma once
 
 #include <Arduino.h>

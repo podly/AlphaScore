@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     Vt16k33Driver.h
+ *
+ * Description:
+ *     Declares low-level control of the HT16K33 and VK16K33 display drivers.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #pragma once
 
 #include <Arduino.h>

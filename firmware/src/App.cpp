@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     App.cpp
+ *
+ * Description:
+ *     Coordinates application startup, serial commands, display updates and Demo Mode.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #include "App.h"
 
 #include <Arduino.h>

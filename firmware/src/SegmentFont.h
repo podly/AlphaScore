@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     SegmentFont.h
+ *
+ * Description:
+ *     Defines segment masks, font styles and character encoding interfaces.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #pragma once
 
 #include <Arduino.h>

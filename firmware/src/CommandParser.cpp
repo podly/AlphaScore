@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     CommandParser.cpp
+ *
+ * Description:
+ *     Parses myPinballs-compatible and extended AlphaScore serial commands.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #include "CommandParser.h"
 
 #include <string.h>

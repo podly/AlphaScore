@@ -1,5 +1,18 @@
 #!/usr/bin/env python3
-"""Enable or disable AlphaScore Demo Mode over UART."""
+"""
+AlphaScore
+
+Copyright (c) 2026 Michal Podlejski
+
+File:
+    demo_mode.py
+
+Description:
+    Enables or disables AlphaScore Demo Mode over UART.
+
+License:
+    MIT License. See LICENSE file for details.
+"""
 
 from __future__ import annotations
 

@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     Vt16k33Driver.cpp
+ *
+ * Description:
+ *     Implements I2C communication with the HT16K33 and VK16K33 display drivers.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #include "Vt16k33Driver.h"
 
 #include <Wire.h>

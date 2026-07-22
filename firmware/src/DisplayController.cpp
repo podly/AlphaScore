@@ -1,3 +1,17 @@
+/******************************************************************************
+ * AlphaScore
+ * ----------------------------------------------------------------------------
+ * File:
+ *     DisplayController.cpp
+ *
+ * Description:
+ *     Implements text, raw-segment, brightness and blink control for logical displays.
+ *
+ * Copyright (c) 2026 Michal Podlejski
+ *
+ * SPDX-License-Identifier: MIT
+ ******************************************************************************/
+
 #include "DisplayController.h"
 
 void DisplayController::begin() {
