@@ -61,7 +61,7 @@ drivers over I2C.
 
 ## Project contents
 
-* [`hardware/`](hardware/) — three PCB solutions, schematics and board renders;
+* [`hardware/`](hardware/) — three PCB solutions, schematics, gerber files and board renders;
 * [`firmware/`](firmware/) — Arduino Nano firmware, build configuration and test utilities;
 * [`protocol/`](protocol/) — complete myPinballs and AlphaScore serial protocol documentation;
 * [`docs/`](docs/) — component datasheets and supporting technical documentation;

@@ -270,7 +270,11 @@ def main() -> int:
 
         try:
             serial_port = serial.Serial(args.port, args.baud, timeout=1)
-            time.sleep(2.0)  # Arduino Nano may reset when the port is opened.
+            print("Waiting 4 seconds for the controller to start...")
+            time.sleep(4.0)  # Arduino Nano may reset when the port is opened.
+            print("Disabling Demo Mode before starting the test...")
+            serial_port.write(b"@X:0\n")
+            serial_port.flush()
         except serial.SerialException as exc:
             print(f"error: cannot open {args.port}: {exc}", file=sys.stderr)
             return 1

@@ -5,6 +5,10 @@
 | Quantity | Component | Specification / notes |
 |---------:|-----------|-----------------------|
 | 1 | Arduino Nano | ATmega328P-based module |
+| 4 | 1×2 male pin header | 2.54 mm pitch |
+| 4 | 1×2 jumper cap | 2.54 mm pitch |
+| 2 (optional) | 1×15 female socket header | 2.54 mm pitch; use with the matching male headers to make the Arduino Nano removable |
+| 2 (optional) | 1×15 male pin header | 2.54 mm pitch; use with the matching socket headers to make the Arduino Nano removable |
 | 1 | 10 kΩ THT trimmer potentiometer | 5 × 5 mm pin spacing |
 | 1 | 470 µF / 10 V THT electrolytic capacitor | 3.5 mm lead spacing |
 | 1 | 2-pin connector | 2.54 mm pitch, e.g. Molex KK-254 |
