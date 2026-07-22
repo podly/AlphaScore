@@ -24,5 +24,5 @@ private:
   static constexpr uint8_t BufferSize = 96;
   char buffer_[BufferSize] = {};
   uint8_t pos_ = 0;
-  bool discardingLine_ = false;
+  bool overflow_ = false;
 };
