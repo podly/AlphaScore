@@ -177,4 +177,8 @@ the commands without connecting to the controller.
 
 ## License
 
-See the repository license for licensing information.
+The firmware and software tools are licensed under the MIT License.
+See [LICENSE](LICENSE).
+
+Hardware documentation is distributed under separate terms.
+See [hardware/LICENSE.md](hardware/LICENSE.md).
