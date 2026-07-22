@@ -1,15 +1,15 @@
 <p align="center">
-  <h1 align="center">AlphaScore Display Controller</h1>
+  <h1 align="center">AlphaScore 15-segment Pinball Display</h1>
 
   <p align="center">
-    Arduino Nano based controller for driving up to four 8-character alphanumeric displays.
+    A complete hardware and firmware solution for four 8-character alphanumeric pinball displays.
   </p>
 </p>
 
 <p align="center">
   <img
     src="assets/images/score-board-15-segments-long.png"
-    alt="AlphaScore controller"
+    alt="AlphaScore 15-segment pinball display system"
     width="1200"
   >
 </p>
@@ -18,21 +18,38 @@
 
 ## Overview
 
-AlphaScore is an Arduino Nano based display controller designed to drive up to four 8-character alphanumeric displays.
+AlphaScore is a complete 15-segment display solution for pinball
+machines. It combines 2-character LED display modules, HT16K33/VK16K33 display
+drivers, an Arduino Nano controller, PCB designs, firmware and serial protocol
+documentation into one project. A complete system drives up to four independent
+8-character alphanumeric displays (32 characters in total).
 
-The firmware was originally developed as a replacement display controller for classic pinball machines and is fully compatible with the **myPinballs Compatibility Protocol**.
+The hardware is available in three PCB versions: two integrated **Wide PCB**
+variants for different HT16K33 packages and a **Modular PCB** solution with a
+separate Arduino Nano controller and display modules. Schematics, PCB renders,
+assembly information and a detailed comparison are available in the
+[hardware documentation](hardware/README.md).
 
-In addition to compatibility mode, AlphaScore introduces an extended protocol providing direct segment control, brightness adjustment, display management and additional advanced features.
-
-The controller communicates over a UART serial interface and does not require any acknowledgements or responses from the host.
+AlphaScore was designed as a replacement display system for classic pinball
+machines. It is fully compatible with the **myPinballs Compatibility Protocol**
+and also provides an extended protocol for direct segment control, brightness
+adjustment, display management and additional functions. The host communicates
+with the Arduino Nano over UART, while the Arduino controls the eight display
+drivers over I2C.
 
 ---
 
 ## Features
 
-* Supports up to 4 independent alphanumeric displays
-* 8 characters per display
+* Complete 15-segment display hardware and firmware solution
+* Up to 4 independent 8-character alphanumeric displays
+* 32 individually controlled character positions in total
+* Three PCB implementations: two integrated Wide variants and one Modular variant
+* 2-character common-cathode LED modules in multiple colours
+* Eight HT16K33 or compatible VK16K33 display drivers
+* Arduino Nano (ATmega328P) controller
 * UART communication (115200 baud)
+* I2C communication between the Arduino and display drivers
 * Compatible with the myPinballs Compatibility Protocol
 * Extended AlphaScore Protocol
 * Direct 7-segment and 15-segment control
@@ -42,274 +59,30 @@ The controller communicates over a UART serial interface and does not require an
 
 ---
 
-## Communication
+## Project contents
 
-| Parameter              | Value                    |
-| ---------------------- | ------------------------ |
-| Interface              | UART                     |
-| Baud rate              | **115200**               |
-| Line ending            | LF (`\n`)                |
-| CR (`\r`)              | Ignored (CRLF supported) |
-| Maximum command length | 95 characters            |
-
-The controller does **not** transmit acknowledgements or responses.
+* [`hardware/`](hardware/) — three PCB solutions, schematics and board renders;
+* [`firmware/`](firmware/) — Arduino Nano firmware, build configuration and test utilities;
+* [`protocol/`](protocol/) — complete myPinballs and AlphaScore serial protocol documentation;
+* [`docs/`](docs/) — component datasheets and supporting technical documentation;
+* [`assets/`](assets/) — images used by the project documentation.
 
 ---
 
-## Display Configuration
-
-| Parameter              | Value |
-| ---------------------- | ----- |
-| Displays               | 1-4   |
-| Characters per display | 8     |
-
----
-
-# myPinballs Compatibility Protocol
-
-Command format:
-
-```text
-MODE:DISPLAY:TEXT
-```
-
-Example:
-
-```text
-1:2:12345678
-```
-
-## Supported Modes
-
-| Mode  | Function                  |
-| ----- | ------------------------- |
-| **1** | Static text               |
-| **2** | Flash entire display      |
-| **3** | Clear display             |
-| **4** | Flash last two characters |
-
-Examples:
-
-```text
-1:2:PLAYER 1
-2:3:JACKPOT
-3:1:
-4:4:MATCH  25
-```
-
-### Text Processing
-
-* Maximum text length is 8 characters.
-* Longer strings are truncated.
-* Shorter strings are padded with spaces.
-
-If the text consists only of:
-
-* digits
-* spaces
-* `?`
-
-the controller automatically inserts thousands separators before displaying the value.
-
-Example:
-
-```text
-1:1:12345678
-```
-
----
-
-# AlphaScore Protocol
-
-All extended commands begin with:
-
-```text
-@
-```
-
-<details>
-
-<summary><strong>Raw Segment Control</strong></summary>
-
-Directly controls display segments by sending raw segment masks.
-
-Format:
-
-```text
-@R:DISPLAY:MASK1,MASK2,...,MASK8
-```
-
-### 7-segment example
-
-```text
-@R:1:3F,06,5B,4F,66,6D,7D,07
-```
-
-### 15-segment example
-
-```text
-@R:2:0001,0002,0004,0008,0010,0020,00C0,4000
-```
-
-#### Rules
-
-* 1-2 hexadecimal digits → 7-segment mask
-* 3-4 hexadecimal digits → native 15-segment mask
-* Uppercase and lowercase hexadecimal digits are accepted
-* Missing masks are treated as `0000`
-* Maximum of 8 masks is processed
-
-> **Important**
->
-> To force a value to be interpreted as a 15-segment mask, use at least three hexadecimal digits.
->
-> Example:
->
-> ```text
-> 001
-> ```
->
-> Prefer four digits:
->
-> ```text
-> 0001
-> ```
-
-</details>
-
----
-
-<details>
-
-<summary><strong>Brightness Control</strong></summary>
-
-### Single display
-
-```text
-@B:DISPLAY:LEVEL
-```
-
-Example:
-
-```text
-@B:3:8
-```
-
-### All displays
-
-```text
-@B:0:LEVEL
-```
-
-Example:
-
-```text
-@B:0:15
-```
-
-Brightness range:
-
-```text
-0-15
-```
-
-> **Note**
->
-> Brightness is refreshed every 100 ms from the onboard analog brightness potentiometer.
-> Values set using `@B` may therefore be overwritten by the analog brightness control.
-
-</details>
-
----
-
-<details>
-
-<summary><strong>Clear Display</strong></summary>
-
-Single display:
-
-```text
-@C:2
-```
-
-All displays:
-
-```text
-@C:0
-```
-
-No trailing colon or additional data is required.
-
-</details>
-
----
-
-<details>
-
-<summary><strong>Demo Mode</strong></summary>
-
-Enable:
-
-```text
-@X:1
-```
-
-Disable:
-
-```text
-@X:0
-```
-
-While Demo Mode is active, all incoming commands are ignored except `@X`, allowing Demo Mode to be disabled via UART.
-
-The included Python helper can switch Demo Mode over a serial port:
-
-```bash
-python -m pip install pyserial
-python firmware/demo_mode.py COM3 on
-python firmware/demo_mode.py COM3 off
-```
-
-Replace `COM3` with the controller's serial port (for example `/dev/ttyUSB0` on Linux).
-
-</details>
-
----
-
-# Command Summary
-
-| Command          | Description                     |
-| ---------------- | ------------------------------- |
-| `1:D:TEXT`       | Display static text             |
-| `2:D:TEXT`       | Flash entire display            |
-| `3:D:`           | Clear display                   |
-| `4:D:TEXT`       | Flash last two characters       |
-| `@R:D:M1,...,M8` | Direct segment control          |
-| `@B:D:LEVEL`     | Set brightness for one display  |
-| `@B:0:LEVEL`     | Set brightness for all displays |
-| `@C:D`           | Clear one display               |
-| `@C:0`           | Clear all displays              |
-| `@X:1`           | Enable Demo Mode                |
-| `@X:0`           | Disable Demo Mode               |
-
----
-
-## Notes
-
-* `D` is the display number (`1-4`).
-* Value `0` is valid only for the global versions of the `@B` and `@C` commands.
-* Commands are terminated with a line feed (`LF`).
-* The controller never sends responses over UART.
+## Protocol documentation
+
+AlphaScore supports the **myPinballs Compatibility Protocol** and the extended
+**AlphaScore Protocol**. Their complete command reference, communication
+parameters and examples are available in [`protocol/README.md`](protocol/README.md).
 
 ---
 
 ## Hardware
 
-The firmware supports:
+The AlphaScore display system is built around:
 
-* Arduino Nano (ATmega328P)
-* ATmega328P with the **old** bootloader
-* ATmega328P with the **new** bootloader
+* Arduino Nano (ATmega328P), with firmware variants for both the **old** and
+  **new** bootloader
 * 2-character, 15-segment common-cathode displays from the
   [ELD-5241A-B series](docs/datasheets/ELD-5241A-B/ELD-5241A-B.pdf), for example:
   * **5241AW** (white)
@@ -318,21 +91,32 @@ The firmware supports:
   * **5241AY** (yellow)
 * [**HT16K33**](docs/datasheets/HT16K33/HT16K33Av111.pdf) or **VK16K33** display drivers
 
+Three PCB implementations are included:
+
+* [**AlphaScore - Wide PCB - 28PIN-SSOP (150mil)**](hardware/AlphaScore%20-%20Wide%20PCB%20-%2028PIN-SSOP%20%28150mil%29/) — integrated wide board using the smaller SSOP28 package;
+* [**AlphaScore - Wide PCB - 28PIN-SOP (300mil)**](hardware/AlphaScore%20-%20Wide%20PCB%20-%2028PIN-SOP%20%28300mil%29/) — integrated wide board using the larger SOP28 package;
+* [**AlphaScore - Modular PCB - 28PIN-SOP (300mil)**](hardware/AlphaScore%20-%20Modular%20PCB%20-%2028PIN-SOP%20%28300mil%29/) — separate Arduino Nano controller and HT16K33 display-module PCBs.
+
+Detailed differences, assembly notes and the contents of each hardware directory
+are described in [`hardware/README.md`](hardware/README.md).
+
 The Arduino communicates with the display drivers over the **I2C** bus. The
 controller uses eight drivers, and each driver must have a unique address set
 with its solder jumpers. Configure the drivers with consecutive addresses from
 `0x70` through `0x77`.
 
-Both firmware variants are automatically built and attached to every GitHub Release.
+Prebuilt firmware variants for ATmega328P boards with the old and new Arduino
+Nano bootloaders are automatically attached to every GitHub Release.
 
 ---
 
 ## Testing
 
-The included [`firmware/test_serial_protocol.py`](firmware/test_serial_protocol.py)
-script sends a visual test sequence that exercises all controller functions on
-every display, including text modes, raw segment control, brightness, clearing
-and Demo Mode.
+The complete display system can be verified with the included
+[`firmware/test_serial_protocol.py`](firmware/test_serial_protocol.py) script.
+It sends a visual test sequence that exercises all controller functions on every
+display, including text modes, individual segments and character positions,
+brightness, clearing and Demo Mode.
 
 Install the required serial library and run the script with the controller's
 serial port:
