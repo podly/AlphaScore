@@ -26,8 +26,8 @@ documentation into one project. A complete system drives up to four independent
 
 The hardware is available in three PCB versions: two integrated **Wide PCB**
 variants for different HT16K33 packages and a **Modular PCB** solution with a
-separate Arduino Nano controller and display modules. Schematics, PCB renders,
-assembly information and a detailed comparison are available in the
+separate Arduino Nano controller and display modules. Schematics, PCB gerber files,
+renders, assembly information and a detailed comparison are available in the
 [hardware documentation](hardware/README.md).
 
 AlphaScore was designed as a replacement display system for classic pinball

@@ -24,8 +24,8 @@ Both are integrated wide-board solutions. Select the design that matches the
 exact package of the HT16K33 devices being fitted. The SSOP28 and SOP28
 footprints differ in body width and pin pitch and are **not interchangeable**.
 
-Each variant directory contains front and back PCB renders together with its
-schematic PDF.
+Each variant directory contains PCB gerber files, front and back PCB renders
+together with its schematic PDF.
 
 ## Modular PCB variant
 
@@ -37,8 +37,8 @@ The Modular PCB solution separates the system into:
 
 This arrangement makes it possible to position display modules independently
 and replace or service an individual module without replacing one large PCB.
-The modular directory contains renders and separate schematic PDFs for the
-controller and display module.
+The modular directory contains PCB gerber files, renders and separate
+schematic PDFs for the controller and display module.
 
 ## Displays and I2C addressing
 
