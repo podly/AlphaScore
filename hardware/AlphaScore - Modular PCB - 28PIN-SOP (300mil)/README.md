@@ -12,15 +12,10 @@
 | 8 | HT16K33 | SOP28 package (300 mil) |
 | 16 | 5241A dual-character 15-segment LED display | 0.54-inch character height, common cathode |
 | 8 | 1N4148 diode | SOD-323 package / footprint |
-
-### 0805 SMD components
-
-| Quantity | Component |
-|---------:|-----------|
-| 24 | 39 kΩ resistor |
-| 16 | 4.7 kΩ resistor |
-| 8 | 10 µF capacitor |
-| 9 | 100 nF capacitor |
+| 24 | 39 kΩ resistor | 0805 package |
+| 16 | 4.7 kΩ resistor | 0805 package |
+| 8 | 10 µF capacitor | 0805 package |
+| 9 | 100 nF capacitor | 0805 package |
 
 ### 5-pin connector notes
 
