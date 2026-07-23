@@ -89,7 +89,9 @@ The AlphaScore display system is built around:
   * **5241AB** (blue)
   * **5241AS** (red)
   * **5241AY** (yellow)
+  
   easily sourced from platforms such as AliExpress and Alibaba
+  
 * [**HT16K33**](docs/datasheets/HT16K33/HT16K33Av111.pdf) or **VK16K33** display drivers
 
 Three PCB implementations are included:
