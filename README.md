@@ -83,12 +83,13 @@ The AlphaScore display system is built around:
 
 * Arduino Nano (ATmega328P), with firmware variants for both the **old** and
   **new** bootloader
-* 2-character, 15-segment common-cathode displays from the
+* popular 0.54-inch character height, 2-character, 15-segment common-cathode displays from the
   [ELD-5241A-B series](docs/datasheets/ELD-5241A-B/ELD-5241A-B.pdf), for example:
   * **5241AW** (white)
   * **5241AB** (blue)
   * **5241AS** (red)
   * **5241AY** (yellow)
+  easily sourced from platforms such as AliExpress and Alibaba
 * [**HT16K33**](docs/datasheets/HT16K33/HT16K33Av111.pdf) or **VK16K33** display drivers
 
 Three PCB implementations are included:
